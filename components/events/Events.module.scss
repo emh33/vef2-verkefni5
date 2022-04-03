@@ -1,0 +1,17 @@
+@import '../../styles/config';
+.events {
+  margin-bottom: 2rem;
+
+  &__event {
+    margin-bottom: 1rem;
+  }
+
+  &__eventLink {
+    font-weight: bold;
+  }
+
+  &__eventDescription {
+    display: block;
+    font-style: italic;
+  }
+}

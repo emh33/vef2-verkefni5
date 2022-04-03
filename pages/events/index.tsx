@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { InferGetStaticPropsType, GetStaticProps } from 'next';
-import { Event } from '../types/index';
-import { Events } from '../components/events/Events';
-import { Layout } from '../components/layout/Layout';
-import { Login } from '../components/login/Login';
+import { Layout } from '../../components/layout/Layout';
+import { Login } from '../../components/login/Login';
+import { Event } from '../../types/index';
+import { Events as EventsComponents } from '../../components/events/Events';
 
-function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
+export default function Events(
+  { data }: InferGetStaticPropsType<typeof getStaticProps>,
+): JSX.Element {
   const { items: eventsList } = data;
   const name = 'test';
   const [loggedin, setLoggedin] = useState(false);
@@ -30,7 +32,7 @@ function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Ele
         />
     )}
     >
-      <Events title="Viðburðir á næstunni" events={eventsList} />
+      <EventsComponents title="Viðburðir á næstunni" events={eventsList} />
     </Layout>
   );
 }
@@ -45,5 +47,3 @@ export const getStaticProps: GetStaticProps = async () => {
     revalidate: 3600,
   };
 };
-
-export default Home;

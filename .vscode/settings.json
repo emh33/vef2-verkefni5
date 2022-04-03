@@ -1,0 +1,9 @@
+{
+    "eslint.validate": [
+      "avascript",
+      "javascriptreact",
+      { "language": "typescript", "autoFix": true },
+      { "language": "typescriptreact", "autoFix": true }
+    ],
+    "debug.javascript.unmapMissingSources": true
+  }

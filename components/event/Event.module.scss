@@ -1,0 +1,28 @@
+@import '../../styles/config';
+.event {
+  &__info,
+  &__registered {
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    font-size: 2rem;
+  }
+
+  &__subtitle {
+    font-size: 1.5rem;
+  }
+
+  &__registeredItem {
+    margin-bottom: 1rem;
+  }
+
+  &__registeredName {
+    font-weight: bold;
+  }
+
+  &__registeredComment {
+    display: block;
+    font-style: italic;
+  }
+}
