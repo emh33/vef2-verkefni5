@@ -12,10 +12,6 @@ export default function Events(
   const name = 'test';
   const [loggedin, setLoggedin] = useState(false);
 
-  const onRegister = (e:React.MouseEvent<HTMLButtonElement>):void => {
-    e.preventDefault();
-    setLoggedin(true);
-  };
   const onLogout = (e:React.MouseEvent<HTMLButtonElement>):void => {
     e.preventDefault();
     setLoggedin(false);

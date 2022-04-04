@@ -1,32 +1,68 @@
-export default function Event(): JSX.Element {
+import {
+  GetStaticPaths, GetStaticProps, InferGetStaticPropsType,
+} from 'next';
+import { useContext } from 'react';
+import { EventItem } from '../../types/index';
+import { Event } from '../../components/event/Event';
+import { AppContext } from '../../context/state';
+import { Layout } from '../../components/layout/Layout';
+import { Login } from '../../components/login/Login';
+
+export default function EventPage(
+  { event }: InferGetStaticPropsType<typeof getStaticProps>,
+): JSX.Element {
+  const name = 'test';
+  const LoginContext = useContext(AppContext);
+
+  const onLogout = (e:React.MouseEvent<HTMLButtonElement>):void => {
+    e.preventDefault();
+    LoginContext.logout();
+  };
   return (
-    <h1>Þetta er viðburður númer </h1>
+    <>
+      <Layout
+        title="Viðburðasíðan"
+        footer={(
+          <Login
+            loggedin={LoginContext.isLoggedin}
+            name={name}
+            onLogout={onLogout}
+          />
+    )}
+      >
+        <Event
+          title={event.name}
+          description={event.description}
+          registrations={event.registrations}
+          loggedin={LoginContext.isLoggedin}
+        />
+      </Layout>
+    </>
   );
 }
 
-/* export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const id = params?.id as string | undefined;
+const baseUrl = 'https://vef2-20222-v3-synilausn.herokuapp.com/events';
 
-  const query = `
-    query($id: ID!) {
-      person(id: $id) {
-        ...character
-      }
-    }
-    ${characterFragment}
-  `;
+export const getStaticPaths : GetStaticPaths = async () => {
+  const res = await fetch(baseUrl);
+  const posts = await res.json();
+  const data = posts.items;
 
-  let person = null;
-
-  if (id) {
-    const result = await fetchSwapi<IPersonResponse>(query, { id });
-
-    person = result.person ?? null;
-  }
-
-  return {
-    props: {
-      person,
+  const paths = data.map((post:EventItem) => ({
+    params: {
+      id: `${post.id}`,
     },
+  }));
+
+  return { paths, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const id = params?.id;
+  const res = await fetch(`${baseUrl}/${id}`);
+  const event = (await res.json()) as EventItem;
+  return !event ? { notFound: true } : {
+    props: { event },
+    revalidate: 3600,
   };
-}; */
+};

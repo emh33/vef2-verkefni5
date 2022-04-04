@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Button } from '../../components/form/Button';
 import { Input } from '../../components/form/Input';
 import { Layout } from '../../components/layout/Layout';
@@ -8,6 +8,8 @@ import { AppContext } from '../../context/state';
 export default function Login(): JSX.Element {
   const name = 'test';
   const LoginContext = useContext(AppContext);
+  const [username, setUSername] = useState<string>();
+  const [password, setPassword] = useState<string>();
 
   const onLogout = (e:React.MouseEvent<HTMLButtonElement>):void => {
     e.preventDefault();
@@ -16,6 +18,15 @@ export default function Login(): JSX.Element {
 
   const login = (e:React.MouseEvent<HTMLButtonElement>):void => {
     e.preventDefault();
+    console.warn(`${username}${password}`);
+  };
+
+  const onChangeUsername = (e: React.ChangeEvent<HTMLInputElement>):void => {
+    setUSername(e.target.value);
+  };
+
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>):void => {
+    setPassword(e.target.value);
   };
 
   return (
@@ -32,9 +43,16 @@ export default function Login(): JSX.Element {
       >
         <div>
           <h2>Innskráning</h2>
-          <Input label="Notendanafn" name="username" type="text" />
-          <Input label="Lykilorð" name="password" type="password" />
-          <Button onClick={login}>Innskrá</Button>
+          <form method="post">
+            <Input
+              label="Notendanafn"
+              name="username"
+              type="text"
+              onChange={onChangeUsername}
+            />
+            <Input label="Lykilorð" name="password" type="password" onChange={onChangePassword} />
+            <Button onClick={login}>Innskrá</Button>
+          </form>
         </div>
       </Layout>
     </>

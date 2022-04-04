@@ -1,21 +1,20 @@
 export type Event = {
-  props : [
-    items : [
-      id: number,
-      name: string,
-      slug:string,
-      description:string,
-      created?:string,
-      updated?:string,
-    ],
-  ]
+  props : {
+    items : Array<EventItem>
+  }
 };
 
-export type EventItem = {
+export interface EventItem {
   id: number,
   name: string,
   slug:string,
   description:string,
   created?:string,
   updated?:string,
+}
+
+export type PageEventProps = {
+  limit: number,
+  offset: number,
+  items :Array<EventItem>
 };

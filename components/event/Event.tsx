@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Link from 'next/link';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import s from './Event.module.scss';
@@ -60,8 +59,6 @@ export function Event({
           )}
         </>
       )}
-
-      <p><Link href="/">Til baka</Link></p>
     </section>
   );
 }
