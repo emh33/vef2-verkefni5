@@ -12,6 +12,7 @@ export const postLogin = async ({ username, password }:User) => {
     },
   });
   if (!response.ok) {
+    await localStorage.setItem('user', 'null');
     const message = await response.json();
     return ({ message });
   }
@@ -30,6 +31,7 @@ export const postRegister = async ({ name, username, password }: User) => {
     },
   });
   if (!response.ok) {
+    await localStorage.setItem('user', 'null');
     const message = await response.json();
     return ({ message });
   }
@@ -37,3 +39,61 @@ export const postRegister = async ({ name, username, password }: User) => {
   const data = await response.json();
   return ({ data });
 };
+
+export const postRegiserEvent = async (id:string, comment:string) => {
+  const localUser = JSON.parse(localStorage.getItem('user') || 'null');
+  let token = 'null';
+  if (localUser !== 'null') {
+    token = localUser.token;
+  }
+  console.info(`Token fundin á localstorage: ${token} `);
+  const response = await fetch(`${BASE_URL}/events/${id}/register`, {
+    method: 'POST',
+    body: JSON.stringify({ comment }),
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    await localStorage.setItem('user', 'null');
+    const message = await response.json();
+    return ({ message });
+  }
+
+  const data = await response.json();
+  return ({ data });
+};
+
+export const deleteRegisterEvent = async (id:string) => {
+  const localUser = JSON.parse(localStorage.getItem('user') || 'null');
+  let token = 'null';
+  if (localUser !== 'null') {
+    token = localUser.token;
+  }
+  console.info(`Token fundin á localstorage: ${token} `);
+  const response = await fetch(`${BASE_URL}/events/${id}/register`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    await localStorage.setItem('user', 'null');
+    const message = await response.json();
+    return ({ message });
+  }
+
+  const data = await response.json();
+  return ({ data });
+};
+
+// /events/:id/register
+
+/* {
+  "id": 272,
+  "comment": "",
+  "event": 1,
+  "userid": 138
+} */

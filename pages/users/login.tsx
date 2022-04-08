@@ -25,7 +25,7 @@ export default function Login(): JSX.Element {
     const login = await postLogin({ username, password });
     if (login.user) {
       context.newUser(login.user.user);
-      await router.push('/');
+      router.push('/');
     }
     if (login.message) {
       console.info(login.message);

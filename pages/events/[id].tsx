@@ -1,5 +1,6 @@
 import {
-  GetStaticPaths, GetStaticProps, InferGetStaticPropsType,
+  GetServerSideProps,
+  InferGetServerSidePropsType,
 } from 'next';
 import { useContext } from 'react';
 import { EventItem } from '../../types/index';
@@ -9,7 +10,7 @@ import { Layout } from '../../components/layout/Layout';
 import { Login } from '../../components/login/Login';
 
 export default function EventPage(
-  { event }: InferGetStaticPropsType<typeof getStaticProps>,
+  { event }: InferGetServerSidePropsType<typeof getServerSideProps>,
 ): JSX.Element {
   const context = useContext(AppContext);
 
@@ -22,6 +23,7 @@ export default function EventPage(
     )}
       >
         <Event
+          id={event.id}
           title={event.name}
           description={event.description}
           registrations={event.registrations}
@@ -34,7 +36,7 @@ export default function EventPage(
 
 const baseUrl = 'https://vef2-20222-v3-synilausn.herokuapp.com/events';
 
-export const getStaticPaths : GetStaticPaths = async () => {
+/* export const getStaticPaths : GetStaticPaths = async () => {
   const res = await fetch(baseUrl);
   const posts = await res.json();
   const data = posts.items;
@@ -46,14 +48,13 @@ export const getStaticPaths : GetStaticPaths = async () => {
   }));
 
   return { paths, fallback: false };
-};
+}; */
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = params?.id;
   const res = await fetch(`${baseUrl}/${id}`);
   const event = (await res.json()) as EventItem;
   return !event ? { notFound: true } : {
     props: { event },
-    revalidate: 3600,
   };
 };
