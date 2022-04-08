@@ -1,0 +1,14 @@
+.layout__header {
+  padding: 0 1rem;
+}
+
+.layout__main {
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+.layout__footer {
+  padding: 1rem;
+  border-top: 1px solid #333;
+}
+/*# sourceMappingURL=Layout.module.css.map */

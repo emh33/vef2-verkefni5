@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEG,AAAD,YAAO,EACN,kBAAY,CAAC;EACZ,aAAa,EAAE,IAAI;CACpB;;AAEA,AAAD,aAAQ,CAAC;EACP,SAAS,EAAE,IAAI;CAChB;;AAEA,AAAD,gBAAW,CAAC;EACV,SAAS,EAAE,MAAM;CAClB;;AAEA,AAAD,sBAAiB,CAAC;EAChB,aAAa,EAAE,IAAI;CACpB;;AAEA,AAAD,sBAAiB,CAAC;EAChB,WAAW,EAAE,IAAI;CAClB;;AAEA,AAAD,yBAAoB,CAAC;EACnB,OAAO,EAAE,KAAK;EACd,UAAU,EAAE,MAAM;CACnB",
+    "sources": [
+        "Event.module.scss",
+        "../../styles/config.scss"
+    ],
+    "names": [],
+    "file": "Event.module.css"
+}

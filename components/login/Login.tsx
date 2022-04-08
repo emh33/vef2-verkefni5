@@ -1,21 +1,20 @@
 import Link from 'next/link';
+import { useContext } from 'react';
+import { AppContext } from '../../context/state';
 
-type LoginTypes = {
-  loggedin:boolean,
-  name?:string,
-  onLogout?:React.MouseEventHandler<HTMLButtonElement>,
-};
+export function Login():JSX.Element {
+  const context = useContext(AppContext);
 
-export function Login({
-  loggedin = false,
-  name,
-  onLogout,
-} :LoginTypes):JSX.Element {
-  if (loggedin) {
+  const onLogout = (e:React.MouseEvent<HTMLButtonElement>):void => {
+    e.preventDefault();
+    context.logoutUser();
+  };
+
+  if (context.loggedin) {
     return (
       <>
         <p>
-          Skráður inn sem <strong>{name}</strong>
+          Velkominn/n  <strong>{context.user?.name}</strong>
         </p>
         <button type="button" onClick={onLogout}>Útskrá</button>
       </>

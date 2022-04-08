@@ -1,0 +1,17 @@
+.events {
+  margin-bottom: 2rem;
+}
+
+.events__event {
+  margin-bottom: 1rem;
+}
+
+.events__eventLink {
+  font-weight: bold;
+}
+
+.events__eventDescription {
+  display: block;
+  font-style: italic;
+}
+/*# sourceMappingURL=Events.module.css.map */

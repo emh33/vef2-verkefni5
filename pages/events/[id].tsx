@@ -11,30 +11,21 @@ import { Login } from '../../components/login/Login';
 export default function EventPage(
   { event }: InferGetStaticPropsType<typeof getStaticProps>,
 ): JSX.Element {
-  const name = 'test';
-  const LoginContext = useContext(AppContext);
+  const context = useContext(AppContext);
 
-  const onLogout = (e:React.MouseEvent<HTMLButtonElement>):void => {
-    e.preventDefault();
-    LoginContext.logout();
-  };
   return (
     <>
       <Layout
         title="Viðburðasíðan"
         footer={(
-          <Login
-            loggedin={LoginContext.isLoggedin}
-            name={name}
-            onLogout={onLogout}
-          />
+          <Login />
     )}
       >
         <Event
           title={event.name}
           description={event.description}
           registrations={event.registrations}
-          loggedin={LoginContext.isLoggedin}
+          loggedin={context.loggedin}
         />
       </Layout>
     </>
